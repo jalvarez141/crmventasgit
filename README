@@ -1,1 +1,4 @@
-ARCHIVO
+crear una caroeta 'modules' en frontend del proyecto, luego copiar toda la cerpeta ventas en /frontend/modules/
+
+
+Main debe modificarse de la carpeta common/config/main del proyecto
