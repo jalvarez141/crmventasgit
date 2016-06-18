@@ -1,9 +1,54 @@
 <?php
+$params = array_merge(
+    require(__DIR__ . '/../../common/config/params.php'),
+    require(__DIR__ . '/../../common/config/params-local.php'),
+    require(__DIR__ . '/params.php'),
+    require(__DIR__ . '/params-local.php')
+);
+
 return [
-    'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
-    'components' => [
-        'cache' => [
-            'class' => 'yii\caching\FileCache',
+    'id' => 'app-frontend',
+    'basePath' => dirname(__DIR__),
+    'bootstrap' => ['log'],
+    'controllerNamespace' => 'frontend\controllers',
+    'modules' => [
+        'message' => [
+            'class' => 'frontend\modules\message\Message',
+        ],
+        'ventas' => [
+            'class' => 'frontend\modules\ventas\Ventas',
         ],
     ],
+    'components' => [
+        'user' => [
+            'identityClass' => 'common\models\User',
+            'enableAutoLogin' => true,
+        ],
+        'log' => [
+            'traceLevel' => YII_DEBUG ? 3 : 0,
+            'targets' => [
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['error', 'warning'],
+                ],
+            ],
+        ],
+        'errorHandler' => [
+            'errorAction' => 'site/error',
+        ],
+        
+        /*
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+            ],
+        ],
+        */
+    ],
+    'params' => $params,
+    'language'=>'es',
+		                    'sourceLanguage'=>'en',
+		// charset to use
+		'charset'=>'utf-8',
 ];
