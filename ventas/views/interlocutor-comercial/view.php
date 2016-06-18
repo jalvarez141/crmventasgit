@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model frontend\modules\ventas\models\InterlocutorComercial */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Interlocutor Comercials', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Datos de Consultora', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="interlocutor-comercial-view">
@@ -15,12 +15,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
+        <?= Html::a('Imprimir', '#',[
+            'class' => 'btn btn-success',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
+                'confirm' => 'Imprimiendo . . .',
             ],
         ]) ?>
     </p>

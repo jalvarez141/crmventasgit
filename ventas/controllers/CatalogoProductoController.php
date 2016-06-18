@@ -8,6 +8,7 @@ use frontend\modules\ventas\models\search\CatalogoProductoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use frontend\modules\ventas\models\PedidoDetalle;
 
 /**
  * CatalogoProductoController implements the CRUD actions for CatalogoProducto model.
@@ -64,12 +65,13 @@ class CatalogoProductoController extends Controller
     public function actionCreate()
     {
         $model = new CatalogoProducto();
-
+        $tipopedido = PedidoDetalle::find()->all();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'tipopedido' => $tipopedido,
             ]);
         }
     }
@@ -80,15 +82,26 @@ class CatalogoProductoController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id){
         $model = $this->findModel($id);
+        $tipopedido = PedidoDetalle::find()->all();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $model->ped = \yii\helpers\ArrayHelper::getColumn(
+            $model->getRolOperaciones()->asArray()->all(),
+            'operacion_id'
+        );
+
+        if ($model->load(Yii::$app->request->post())) {
+            if (!isset($_POST['Rol']['operaciones'])) {
+                $model->operaciones = [];
+            }
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'tipoOperaciones' => $tipoOperaciones
             ]);
         }
     }

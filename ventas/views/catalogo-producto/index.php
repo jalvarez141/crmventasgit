@@ -19,17 +19,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Catalogo Producto', ['create'], ['class' => 'btn btn-success']) ?>
- 
-        <?= Html::a('Create Pedido Detalle', ['pedido-detalle/create'], ['class' => 'btn btn-success']) ?>
-
-        
-        <?= Html::a('Crear pedido', '#', [
+        <?= Html::a('Buscar Consultora', ['interlocutor-comercial/index'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Agregar a Pedido', '#', [
             'id' => 'activity-index-link',
             'class' => 'btn btn-success',
             'data-toggle' => 'modal',
             'data-target' => '#modal',
-            'data-url' => Url::to(['pedido-detalle/create']),
+            'data-url' => Url::to(['pedido-detalle/create_1']),
             'data-pjax' => '0',
         ]); ?>
     <?php
@@ -58,7 +54,7 @@ Modal::end();
 ?>
         
         
-        <?= Html::a('Buscar Consultora', ['interlocutor-comercial/index'], ['class' => 'btn btn-primary']) ?>
+        
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -78,9 +74,32 @@ Modal::end();
              'tamcatprod:text:Tamaño',
              'stocatprod:text:Stock',
 
-            ['class' => 'yii\grid\ActionColumn'],
+           // ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view}',
+                'buttons' => [
+                    'view' => function ($url, $model, $key) {
+                        return Html::a('<span class="glyphicon glyphicon-zoom-in"></span>', $url, [
+                        ]);
+                    },
+            ]],
+                            
             ['class' => 'yii\grid\CheckboxColumn'],
+                            
+         /*  [
+            'class'  => '\yii\grid\CheckboxColumn',
+            'checkboxOptions' => [
+               'class' => 'simple'
+            ]
+            ],*/
+                            
         ],
 
     ]); ?>
+   <?php //<?= 
+      //  Html::button('<i class="glyphicon glyphicon-download-alt"></i><span>   Filter Rows Select</span>',
+     //   ['type'=>'button', 'class'=>'btn btn-success',
+    //        'onclick'=>'var keys = $("#kv-grid").yiiGridView("getSelectedRows").length'
+   // ])?>
 </div>

@@ -16,13 +16,14 @@ use Yii;
  * @property Producto $producto
  */
 class PedidoDetalle extends \yii\db\ActiveRecord
-{
+{public $my_attribute='9001';
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
         return 'pedido_detalle';
+        
     }
 
     /**
@@ -33,7 +34,7 @@ class PedidoDetalle extends \yii\db\ActiveRecord
         return [
             [['producto_id', 'pedido_id', 'cantidad'], 'required'],
             [['producto_id', 'pedido_id', 'cantidad'], 'integer'],
-          //  [['pedido_id'], 'exist', 'skipOnError' => true, 'targetClass' => Pedido::className(), 'targetAttribute' => ['pedido_id' => 'id']],
+            [['pedido_id'], 'exist', 'skipOnError' => true, 'targetClass' => Pedido::className(), 'targetAttribute' => ['pedido_id' => 'id']],
           //  [['producto_id'], 'exist', 'skipOnError' => true, 'targetClass' => Producto::className(), 'targetAttribute' => ['producto_id' => 'id']],
         ];
     }

@@ -7,34 +7,42 @@ use yii\grid\GridView;
 /* @var $searchModel frontend\modules\ventas\models\search\InterlocutorComercialSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Interlocutor Comercials';
+$this->title = 'Buscar consultora';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="interlocutor-comercial-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <h1 style="color:#00b3ee"  align='center'><?= Html::encode($this->title) ?></h1>
+        <hr style="height: 2px ; background: #0097cf"><br>
 
-    <p>
-        <?= Html::a('Create Interlocutor Comercial', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+        <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+  
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'zona_id',
-            'roles_id',
             'codigo',
             'nombre',
+            'roles_id',
             // 'apellido',
             // 'email:email',
             // 'telefono',
             // 'estado',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view}',
+                'buttons' => [
+                    'view' => function ($url, $model, $key) {
+                        return Html::a('<span class="glyphicon glyphicon-zoom-in"></span>', $url, [
+                        ]);
+                    },
+            ]],
         ],
     ]); ?>
 </div>

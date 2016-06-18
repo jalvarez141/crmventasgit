@@ -2,34 +2,72 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use yii\widgets\Pjax;
+use yii\helpers\Url;
+use yii\bootstrap\Modal;
+use frontend\modules\ventas\models\CatalogoProducto;
+use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\modules\ventas\models\search\PedidoDetalleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Pedido Detalles';
+$this->title = 'Mis Pedidos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pedido-detalle-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <h1 style="color:#00b3ee"  align='center'><?= Html::encode($this->title) ?></h1>
+   <hr style="height: 2px ; background: #0097cf"><br>
+ <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Pedido Detalle', ['create'], ['class' => 'btn btn-success']) ?>
+    <p align='center'>
+   
+    <?= Html::a('Agregar Pedido',['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    
    <?=  GridView::widget([
+       'id' => 'pedido-detalle-grid',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'id',
-            'producto_id',
+            //'producto_id',
+            ['attribute'=>'producto_id',
+                'value'=>function($model){
+                    $catalogoproducto = CatalogoProducto::findOne($model->producto_id);
+                    return $catalogoproducto->nomcatprod;
+                },
+                   //'filter' => ArrayHelper::map(CatalogoProducto::find()->all(),'id','nomcatprod'),
+            ],
             'pedido_id',
             'cantidad',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]);  ?> 
-    
+
+ <?php    
+     $this->registerJs(
+    "$(document).on('click', '#activity-index-link', (function() {
+        $.get(
+            $(this).data('url'),
+            function (data) {
+                $('.modal-body').html(data);
+                $('#modal').modal();
+            }
+        );
+    }));"
+); ?>
+     <?php
+Modal::begin([
+    'id' => 'modal',
+    'header' => '<h4 class="modal-title">Complete</h4>',
+    'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Cerrar</a>',
+]);
+ 
+echo "<div class='well'></div>";
+ 
+Modal::end();
+?>
  
 </div>
