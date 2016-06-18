@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Buscar Consultora', ['interlocutor-comercial/index'], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Agregar a Pedido', '#', [
+        <?= Html::a('Agregar a Venta', '#', [
             'id' => 'activity-index-link',
             'class' => 'btn btn-success',
             'data-toggle' => 'modal',
@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'data-url' => Url::to(['pedido-detalle/create_1']),
             'data-pjax' => '0',
         ]); ?>
+       <?= Html::a('Terminar Venta', ['realizarcomprat'], ['class' => 'btn btn-success']) ?>
     <?php
 $this->registerJs(
     "$(document).on('click', '#activity-index-link', (function() {

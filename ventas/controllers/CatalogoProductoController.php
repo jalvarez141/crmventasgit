@@ -134,4 +134,13 @@ class CatalogoProductoController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+    public function actionRealizarcomprat(){
+        return $this->render('realizarcompraT');
+    }
+    public function actionFacturatienda(){
+        return $this->render('facturatienda');
+    }
+    public function actionBoletatienda(){
+        return $this->render('boletatienda');
+    }
 }

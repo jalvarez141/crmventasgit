@@ -17,4 +17,8 @@ class DefaultController extends Controller
     {
         return $this->render('index');
     }
+        public function actionRealizarcomprat(){
+        return $this->render('views/realizarcompraT');
+    }
+
 }
