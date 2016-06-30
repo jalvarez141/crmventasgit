@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\bootstrap\Modal;
+use yii\widgets\Pjax;
+use yii\web\JsExpression;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\modules\ventas\models\search\CatalogoProductoSearch */
@@ -25,39 +27,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'class' => 'btn btn-success',
             'data-toggle' => 'modal',
             'data-target' => '#modal',
-            'data-url' => Url::to(['pedido-detalle/create_1']),
+            'data-url' => Url::to(['pedido-detalle/create_2']),
             'data-pjax' => '0',
         ]); ?>
-       <?= Html::a('Terminar Venta', ['realizarcomprat'], ['class' => 'btn btn-success']) ?>
-    <?php
-$this->registerJs(
-    "$(document).on('click', '#activity-index-link', (function() {
-        $.get(
-            $(this).data('url'),
-            function (data) {
-                $('.modal-body').html(data);
-                $('#modal').modal();
-            }
-        );
-    }));"
-); ?>
- 
-<?php
-Modal::begin([
-    'id' => 'modal',
-    'header' => '<h4 class="modal-title">Complete</h4>',
-    'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Cerrar</a>',
-]);
- 
-echo "<div class='well'></div>";
- 
-Modal::end();
-?>
-        
-        
+       <?= Html::a('Terminar Venta', ['realizarcomprat'], ['class' => 'btn btn-success']) ?>    
         
     </p>
+    <?php //Pjax::begin() ?>
     <?= GridView::widget([
+        'id' => 'pedido-detalle-grid',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -98,6 +76,35 @@ Modal::end();
         ],
 
     ]); ?>
+    
+    
+    <?php
+$this->registerJs(
+    "$(document).on('click', '#activity-index-link', (function() {
+        $.get(
+            $(this).data('url'),
+            function (data) {
+                $('.modal-body').html(data);
+                $('#modal').modal();
+            }
+        );
+    }));"
+); ?>
+ 
+<?php
+Modal::begin([
+    'options'=>[
+        'tabindex'=>'false'
+    ],
+    'id' => 'modal',
+    'header' => '<h4 class="modal-title">Complete</h4>',
+    'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Cerrar</a>',
+]);
+ 
+echo "<div class='well'></div>";
+ 
+Modal::end();
+?>
    <?php //<?= 
       //  Html::button('<i class="glyphicon glyphicon-download-alt"></i><span>   Filter Rows Select</span>',
      //   ['type'=>'button', 'class'=>'btn btn-success',

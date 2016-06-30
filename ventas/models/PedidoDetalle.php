@@ -36,7 +36,8 @@ class PedidoDetalle extends \yii\db\ActiveRecord
             [['producto_id', 'pedido_id', 'cantidad'], 'integer'],
             [['pedido_id'], 'exist', 'skipOnError' => true, 'targetClass' => Pedido::className(), 'targetAttribute' => ['pedido_id' => 'id']],
           //  [['producto_id'], 'exist', 'skipOnError' => true, 'targetClass' => Producto::className(), 'targetAttribute' => ['producto_id' => 'id']],
-        ];
+            
+            ];
     }
 
     /**
@@ -49,6 +50,7 @@ class PedidoDetalle extends \yii\db\ActiveRecord
             'producto_id' => 'ID Producto',
             'pedido_id' => 'ID Pedido',
             'cantidad' => 'Cantidad',
+            
         ];
     }
 

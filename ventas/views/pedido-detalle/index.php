@@ -7,6 +7,8 @@ use yii\helpers\Url;
 use yii\bootstrap\Modal;
 use frontend\modules\ventas\models\CatalogoProducto;
 use yii\helpers\ArrayHelper;
+use yii\web\JsExpression;
+
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\modules\ventas\models\search\PedidoDetalleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -21,10 +23,17 @@ $this->params['breadcrumbs'][] = $this->title;
  <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p align='center'>
-   
+   <?= Html::a('Agregar a Pedidos', '#', [
+            'id' => 'activity-index-link',
+            'class' => 'btn btn-success',
+            'data-toggle' => 'modal',
+            'data-target' => '#modal',
+            'data-url' => Url::to(['create_1']),
+            'data-pjax' => '0',
+        ]); ?>
     <?= Html::a('Agregar Pedido',['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    
+    <?php Pjax::begin() ?>
    <?=  GridView::widget([
        'id' => 'pedido-detalle-grid',
         'dataProvider' => $dataProvider,
@@ -45,6 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]);  ?> 
+    <?php Pjax::end() ?>
 
  <?php    
      $this->registerJs(
@@ -60,10 +70,14 @@ $this->params['breadcrumbs'][] = $this->title;
 ); ?>
      <?php
 Modal::begin([
+    'options'=>[
+        'tabindex'=>'false'
+    ],
     'id' => 'modal',
     'header' => '<h4 class="modal-title">Complete</h4>',
     'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Cerrar</a>',
-]);
+
+    ]);
  
 echo "<div class='well'></div>";
  

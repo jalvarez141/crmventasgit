@@ -8,6 +8,10 @@ use frontend\modules\ventas\models\search\PedidoDetalleSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\HtmlHelpers;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
+
 
 /**
  * PedidoDetalleController implements the CRUD actions for PedidoDetalle model.
@@ -73,9 +77,29 @@ class PedidoDetalleController extends Controller
             ]);
         }
     }
+    
+        public function actionCreate_2($submit = false)
+    {
+        $model = new PedidoDetalle();
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()) && $submit == false) {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return ActiveForm::validate($model);
+    }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ['message' => '¡Agregado...!',
+                   ];
+        } else {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return $this->renderAjax('create_2', [
+                'model' => $model,
+            ]);
+        }
+    }
  
     public function actionCreate_1($submit = false)
-{
+{   
     $model = new PedidoDetalle();
 
  
@@ -88,9 +112,8 @@ class PedidoDetalleController extends Controller
         if ($model->save()) {
             $model->refresh();
             Yii::$app->response->format = Response::FORMAT_JSON;
-            return [
-                'message' => '¡Éxito!',
-            ];
+            return ['message' => '¡Éxito!',
+                    ];
         } else {
             Yii::$app->response->format = Response::FORMAT_JSON;
             return ActiveForm::validate($model);
@@ -100,6 +123,7 @@ class PedidoDetalleController extends Controller
     return $this->renderAjax('create_1', [
         'model' => $model,
     ]);
+        
 }
 
     /**
@@ -120,6 +144,19 @@ class PedidoDetalleController extends Controller
             ]);
         }
     }
+    
+        public function actionUpdate_2($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['catalogo-producto/realizarcomprat']);
+        } else {
+            return $this->render('update_2', [
+                'model' => $model,
+            ]);
+        }
+    }
 
     /**
      * Deletes an existing PedidoDetalle model.
@@ -132,6 +169,13 @@ class PedidoDetalleController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+    
+        public function actionDelete2($id)
+    {
+        $this->findModel($id)->delete();
+
+        return $this->redirect(['catalogo-producto/realizarcompra']);
     }
 
     /**
@@ -149,4 +193,7 @@ class PedidoDetalleController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+    public function actionUserList($q = null, $id = null) {
+    return HtmlHelpers::sugestionList('producto_id', 'catalogo_producto', 'CatalogoProducto', $q, $id);
+}
 }

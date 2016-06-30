@@ -5,12 +5,12 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\modules\ventas\models\PedidoDetalle */
 
-$this->title = 'Modificar Pedido: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Pedido Detalles', 'url' => ['index']];
+$this->title = 'Modificar Producto de Venta: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Catalogo Productos', 'url' => ['catalogo-productos/index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Modificar';
 ?>
-<div class="pedido-detalle-update">
+<div class="pedido-detalle-update-2">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

@@ -2,19 +2,19 @@
 
 use yii\helpers\Html;
 
+
 /* @var $this yii\web\View */
 /* @var $model frontend\modules\ventas\models\PedidoDetalle */
 
-$this->title = 'Modificar Pedido: ' . $model->id;
+$this->title = 'Venta';
 $this->params['breadcrumbs'][] = ['label' => 'Pedido Detalles', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Modificar';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="pedido-detalle-update">
+<div class="pedido-detalle-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
+    <?= $this->render('_form_2', [
         'model' => $model,
     ]) ?>
 
