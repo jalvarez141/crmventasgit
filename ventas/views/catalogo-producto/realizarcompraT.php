@@ -53,7 +53,8 @@ $this->params['breadcrumbs'][] = $this->title;
     ?>">
                 <span class="glyphicon glyphicon-edit"></span>
             </a></td>
-      <td><?= Html::a('<span class="glyphicon glyphicon-trash"></span>', ['pedido-detalle/delete2', 'id' => $row['id']], [
+      <td><?= Html::a('<span class="glyphicon glyphicon-trash"></span>', ['pedido-detalle/delete2', 'id' => $row['id']],
+              [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Esta seguro de eliminar?',

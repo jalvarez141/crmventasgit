@@ -40,15 +40,20 @@ class CatalogoProducto extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['catalogo_id', 'campana_id', 'producto_id', 'incentivo_id', 'nomcatprod', 'precatprod', 'tamcatprod', 'stocatprod'], 'required'],
+           /* [['catalogo_id', 'campana_id', 'producto_id', 'incentivo_id', 'nomcatprod', 'precatprod', 'tamcatprod', 'stocatprod'], 'required'],
             [['catalogo_id', 'campana_id', 'producto_id', 'incentivo_id', 'estado', 'tamcatprod', 'stocatprod'], 'integer'],
             [['precatprod'], 'number'],
             [['descripcion'], 'string', 'max' => 255],
-            [['nomcatprod'], 'string', 'max' => 45],
+            [['nomcatprod'], 'string', 'max' => 45],*/
+            
+            
            // [['campana_id'], 'exist', 'skipOnError' => true, 'targetClass' => Campana::className(), 'targetAttribute' => ['campana_id' => 'id']],
            // [['catalogo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Catalogo::className(), 'targetAttribute' => ['catalogo_id' => 'id']],
            // [['incentivo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Incentivo::className(), 'targetAttribute' => ['incentivo_id' => 'id']],
            // [['producto_id'], 'exist', 'skipOnError' => true, 'targetClass' => Producto::className(), 'targetAttribute' => ['producto_id' => 'id']],
+             [['catalogo_id', 'campana_id', 'producto_id', 'incentivo_id'], 'required'],
+            [['catalogo_id', 'campana_id', 'producto_id', 'incentivo_id', 'estado'], 'integer'],
+            
         ];
     }
 
@@ -65,10 +70,10 @@ class CatalogoProducto extends \yii\db\ActiveRecord
          //   'incentivo_id' => 'Incentivo ID',
             'descripcion' => 'Descripcion',
             'estado' => 'Estado',
-            'nomcatprod' => 'Nomcatprod',
+           /* 'nomcatprod' => 'Nomcatprod',
             'precatprod' => 'Precatprod',
             'tamcatprod' => 'Tamcatprod',
-            'stocatprod' => 'Stocatprod',
+            'stocatprod' => 'Stocatprod',*/
         ];
     }
 

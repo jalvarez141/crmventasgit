@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
  <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p align='center'>
-   <?= Html::a('Agregar a Pedidos', '#', [
+   <?= Html::a('Agregar Pedidos', '#', [
             'id' => 'activity-index-link',
             'class' => 'btn btn-success',
             'data-toggle' => 'modal',
@@ -31,7 +31,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'data-url' => Url::to(['create_1']),
             'data-pjax' => '0',
         ]); ?>
-    <?= Html::a('Agregar Pedido',['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?php Pjax::begin() ?>
    <?=  GridView::widget([

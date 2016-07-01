@@ -5,7 +5,11 @@ use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\bootstrap\Modal;
 use yii\widgets\Pjax;
+use frontend\modules\ventas\models\Producto;
+use frontend\modules\ventas\models\Stock;
 use yii\web\JsExpression;
+use yii\db\Query;
+$connection = \Yii::$app->db;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\modules\ventas\models\search\CatalogoProductoSearch */
@@ -22,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Buscar Consultora', ['interlocutor-comercial/index'], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Agregar a Venta', '#', [
+        <?= Html::a('Agregar Producto a Venta', '#', [
             'id' => 'activity-index-link',
             'class' => 'btn btn-success',
             'data-toggle' => 'modal',
@@ -30,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'data-url' => Url::to(['pedido-detalle/create_2']),
             'data-pjax' => '0',
         ]); ?>
-       <?= Html::a('Terminar Venta', ['realizarcomprat'], ['class' => 'btn btn-success']) ?>    
+       <?= Html::a('Ver Productos de la Venta', ['realizarcomprat'], ['class' => 'btn btn-success']) ?>    
         
     </p>
     <?php //Pjax::begin() ?>
@@ -41,18 +45,44 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
              
-           // 'id',
-           // 'catalogo_id',
-           // 'campana_id',
+          //  'id',
+            'catalogo_id',
+            //'campana_id',
             'producto_id:text:Identificador',
-           // 'incentivo_id',
-           //  'descripcion',
-           //  'estado',
-             'nomcatprod:text:Nombre',
+            //'incentivo_id',
+
+            /* 'nomcatprod:text:Nombre',
              'precatprod:text:Precio',
              'tamcatprod:text:Tamaño',
-             'stocatprod:text:Stock',
-
+             'stocatprod:text:Stock',*/
+            ['attribute'=>'nombre',
+                'value'=>function($model){
+                    $catalogoproducto = Producto::findOne($model->id);
+                    return $catalogoproducto->nombre;
+                },
+                   //'filter' => ArrayHelper::map(CatalogoProducto::find()->all(),'id','nomcatprod'),
+            ],
+            ['attribute'=>'precio',
+                'value'=>function($model){
+                    $catalogoproducto = Producto::findOne($model->id);
+                    return $catalogoproducto->precio;
+                },
+                   //'filter' => ArrayHelper::map(CatalogoProducto::find()->all(),'id','nomcatprod'),
+            ],
+            ['attribute'=>'precio venta',
+                'value'=>function($model){
+                    $catalogoproducto = Producto::findOne($model->id);
+                    return $catalogoproducto->precio_vta;
+                },
+                   //'filter' => ArrayHelper::map(CatalogoProducto::find()->all(),'id','nomcatprod'),
+            ],
+           /* ['attribute'=>'stock',
+                'value'=>function($model){
+                    $catalogoproducto = Stock::findOne($model->id);
+                    return $catalogoproducto->stock;
+                },
+                   //'filter' => ArrayHelper::map(CatalogoProducto::find()->all(),'id','nomcatprod'),
+            ],*/
            // ['class' => 'yii\grid\ActionColumn'],
             [
                 'class' => 'yii\grid\ActionColumn',
@@ -63,7 +93,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]);
                     },
             ]],
-                            
+                        'descripcion',
+             'estado',                
             ['class' => 'yii\grid\CheckboxColumn'],
                             
          /*  [
