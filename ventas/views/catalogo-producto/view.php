@@ -62,10 +62,10 @@ Modal::end();
             'incentivo_id',
             'descripcion',
             'estado',
-            'nomcatprod',
-            'precatprod',
-            'tamcatprod',
-            'stocatprod',
+            'unidad',
+            'precio',
+            'precio_vta',
+            'descuento',
         ],
     ]) ?>
 

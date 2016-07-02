@@ -6,7 +6,10 @@ use yii\helpers\Url;
 use yii\web\JsExpression;
 use kartik\widgets\Select2;
 use yii\helpers\ArrayHelper;
-use frontend\modules\ventas\models\PedidoDetalle
+use frontend\modules\ventas\models\Pedido;
+use frontend\modules\ventas\models\PedidoDetalle;
+use yii\db\Query;
+$connection = \Yii::$app->db;
 /* @var $this yii\web\View */
 /* @var $model frontend\modules\ventas\models\PedidoDetalle */
 /* @var $form yii\widgets\ActiveForm */
@@ -51,15 +54,30 @@ Select2::widget([
   </br> 
 
 
-   <?= $form->field($model, 'pedido_id')->dropDownList(ArrayHelper::map(PedidoDetalle::find()->where(['pedido_id'=>8001])->all()
-           , 'pedido_id', 'pedido_id'))
+    <?php
+ $sql='SELECT
+      id
+    FROM
+      pedido
+    WHERE
+     pedido.tipo_pedido_id = "800"
+    ORDER BY
+      id DESC
+    LIMIT 1;
+';
+    
+     $model1=$connection->createCommand($sql)->queryOne();
+            ?>
+   <?= $form->field($model, 'pedido_id')->dropDownList(ArrayHelper::map(Pedido::find()->where(['id'=>[$model1['id']]])->all()
+           , 'id', 'id'))
 ?>
+  
     
  <?= $form->field($model, 'cantidad')->textInput() ?>
 
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Agregar1' : 'Modificar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Agregar' : 'Modificar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

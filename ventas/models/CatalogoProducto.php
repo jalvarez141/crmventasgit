@@ -12,17 +12,15 @@ use Yii;
  * @property integer $campana_id
  * @property integer $producto_id
  * @property integer $incentivo_id
- * @property string $descripcion
  * @property integer $estado
- * @property string $nomcatprod
- * @property double $precatprod
- * @property integer $tamcatprod
- * @property integer $stocatprod
- *
  * @property Campana $campana
  * @property Catalogo $catalogo
  * @property Incentivo $incentivo
  * @property Producto $producto
+ * @property integer $unidad
+ * @property string $precio
+ * @property string $precio_vta
+ * @property integer $descuento
  */
 class CatalogoProducto extends \yii\db\ActiveRecord
 {
@@ -53,7 +51,8 @@ class CatalogoProducto extends \yii\db\ActiveRecord
            // [['producto_id'], 'exist', 'skipOnError' => true, 'targetClass' => Producto::className(), 'targetAttribute' => ['producto_id' => 'id']],
              [['catalogo_id', 'campana_id', 'producto_id', 'incentivo_id'], 'required'],
             [['catalogo_id', 'campana_id', 'producto_id', 'incentivo_id', 'estado'], 'integer'],
-            
+             [['unidad', 'descuento'], 'integer'],
+            [['precio', 'precio_vta'], 'number'],
         ];
     }
 
@@ -70,6 +69,10 @@ class CatalogoProducto extends \yii\db\ActiveRecord
          //   'incentivo_id' => 'Incentivo ID',
             'descripcion' => 'Descripcion',
             'estado' => 'Estado',
+            'unidad' => 'Unidad',
+            'precio' => 'Precio',
+            'precio_vta' => 'Precio Vta',
+            'descuento' => 'Descuento',
            /* 'nomcatprod' => 'Nomcatprod',
             'precatprod' => 'Precatprod',
             'tamcatprod' => 'Tamcatprod',

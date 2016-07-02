@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <th></th>
     </tr>
     <?php $table = new PedidoDetalle();
-    $sql='select pedido_detalle.id as id,pedido_detalle.producto_id as producto_id, producto.nombre as nombre, producto.precio_vta as precio_vta,  pedido_detalle.cantidad as cantidad from pedido_detalle, producto where pedido_detalle.pedido_id=9001 and pedido_detalle.producto_id=producto.id ;
+    $sql='select pedido_detalle.id as id,pedido_detalle.producto_id as producto_id, producto.nombre as nombre, catalogo_producto.precio_vta as precio_vta,  pedido_detalle.cantidad as cantidad from pedido_detalle, producto,catalogo_producto where pedido_detalle.pedido_id=9001 and pedido_detalle.producto_id=producto.id and catalogo_producto.producto_id=producto.id ;
 ';
     
     $model=$connection->createCommand($sql)->queryAll();

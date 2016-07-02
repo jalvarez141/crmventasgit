@@ -54,17 +54,17 @@ class Pedido extends \yii\db\ActiveRecord
         }
     }
     
- 
+/* 
 public function getCatalogoProductosPermitidas()
 {
     return $this->hasMany(CatalogoProducto::className(), ['id' => 'producto_id'])
         ->viaTable('pedido_detalle', ['pedido_id' => 'id']);
-}
- 
+}*/
+/* 
 public function getCatalogoProductosPermitidasList()
 {
     return $this->getCatalogoProductosPermitidas()->asArray();
-}
+}*/
 
     /**
      * @inheritdoc
@@ -81,34 +81,34 @@ public function getCatalogoProductosPermitidasList()
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getDespachos()
+   /* public function getDespachos()
     {
         return $this->hasMany(Despacho::className(), ['pedido_id' => 'id']);
-    }
+    }*/
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getOperacions()
+   /* public function getOperacions()
     {
         return $this->hasMany(Operacion::className(), ['pedido_id' => 'id']);
-    }
+    }*/
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getInterlocutorComercial()
+   /* public function getInterlocutorComercial()
     {
         return $this->hasOne(InterlocutorComercial::className(), ['id' => 'interlocutor_comercial_id']);
-    }
+    }*/
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTipoPedido()
+   /* public function getTipoPedido()
     {
         return $this->hasOne(TipoPedido::className(), ['id' => 'tipo_pedido_id']);
-    }
+    }*/
 
     /**
      * @return \yii\db\ActiveQuery
@@ -121,8 +121,8 @@ public function getCatalogoProductosPermitidasList()
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVentas()
+   /* public function getVentas()
     {
         return $this->hasMany(Venta::className(), ['pedido_id' => 'id']);
-    }
+    }*/
 }

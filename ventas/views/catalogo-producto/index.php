@@ -46,16 +46,22 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
              
           //  'id',
-            'catalogo_id',
+           // 'catalogo_id:text:catalogo',
             //'campana_id',
-            'producto_id:text:Identificador',
+            'producto_id:text:Codigo Producto',
             //'incentivo_id',
 
             /* 'nomcatprod:text:Nombre',
              'precatprod:text:Precio',
              'tamcatprod:text:Tamaño',
              'stocatprod:text:Stock',*/
-            ['attribute'=>'nombre',
+            'unidad',
+            'precio',
+            'precio_vta',
+            'descuento',
+            
+            
+          /*  ['attribute'=>'nombre',
                 'value'=>function($model){
                     $catalogoproducto = Producto::findOne($model->id);
                     return $catalogoproducto->nombre;
@@ -73,9 +79,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'=>function($model){
                     $catalogoproducto = Producto::findOne($model->id);
                     return $catalogoproducto->precio_vta;
-                },
+                },*/
                    //'filter' => ArrayHelper::map(CatalogoProducto::find()->all(),'id','nomcatprod'),
-            ],
+            //],
            /* ['attribute'=>'stock',
                 'value'=>function($model){
                     $catalogoproducto = Stock::findOne($model->id);
@@ -84,6 +90,8 @@ $this->params['breadcrumbs'][] = $this->title;
                    //'filter' => ArrayHelper::map(CatalogoProducto::find()->all(),'id','nomcatprod'),
             ],*/
            // ['class' => 'yii\grid\ActionColumn'],
+                                    'descripcion',
+             'estado',  
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{view}',
@@ -93,8 +101,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]);
                     },
             ]],
-                        'descripcion',
-             'estado',                
+              
             ['class' => 'yii\grid\CheckboxColumn'],
                             
          /*  [

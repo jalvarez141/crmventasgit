@@ -9,6 +9,8 @@ use frontend\modules\ventas\models\Pedido;
 use yii\helpers\ArrayHelper;
 use frontend\modules\ventas\models\PedidoDetalle;
 use yii\jui\DatePicker;
+use yii\db\Query;
+$connection = \Yii::$app->db;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\modules\ventas\models\PedidoDetalle */
@@ -47,9 +49,22 @@ Select2::widget([
 ])  
   
 ?>
+    <?php
+ $sql='SELECT
+      id
+    FROM
+      pedido
+    WHERE
+     pedido.tipo_pedido_id = "900"
+    ORDER BY
+      id desc
+    LIMIT 1;
+';
     
-   <?= $form->field($model, 'pedido_id')->dropDownList(ArrayHelper::map(PedidoDetalle::find()->where(['pedido_id'=>9001])->all()
-           , 'pedido_id', 'pedido_id'))
+     $model1=$connection->createCommand($sql)->queryOne();
+            ?>
+   <?= $form->field($model, 'pedido_id')->dropDownList(ArrayHelper::map(Pedido::find()->where(['id'=>[$model1['id']]])->all()
+           , 'id', 'id'))
 ?>
 
     <?= $form->field($model, 'cantidad')->textInput() ?>

@@ -18,9 +18,9 @@ class CatalogoProductoSearch extends CatalogoProducto
     public function rules()
     {
         return [
-            [['id', 'catalogo_id', 'campana_id', 'producto_id', 'incentivo_id', 'estado', 'tamcatprod', 'stocatprod'], 'integer'],
-            [['descripcion', 'nomcatprod'], 'safe'],
-            [['precatprod'], 'number'],
+            [['id', 'catalogo_id', 'campana_id', 'producto_id', 'incentivo_id', 'estado'], 'integer'],
+            [['descripcion'], 'safe'],
+            //[['precatprod'], 'number'],
         ];
     }
 
@@ -66,13 +66,17 @@ class CatalogoProductoSearch extends CatalogoProducto
             'producto_id' => $this->producto_id,
             'incentivo_id' => $this->incentivo_id,
             'estado' => $this->estado,
-            'precatprod' => $this->precatprod,
-            'tamcatprod' => $this->tamcatprod,
-            'stocatprod' => $this->stocatprod,
+             'unidad' =>$this->unidad,
+            'precio' => $this->precio,
+            'precio_vta' => $this->precio_vta,
+            'descuento' => $this->descuento,
+           // 'precatprod' => $this->precatprod,
+          //  'tamcatprod' => $this->tamcatprod,
+          //  'stocatprod' => $this->stocatprod,
         ]);
 
-        $query->andFilterWhere(['like', 'descripcion', $this->descripcion])
-            ->andFilterWhere(['like', 'nomcatprod', $this->nomcatprod]);
+        $query->andFilterWhere(['like', 'descripcion', $this->descripcion]);
+
 
         return $dataProvider;
     }
