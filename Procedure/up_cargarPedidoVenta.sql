@@ -1,4 +1,6 @@
-﻿CREATE DEFINER=`root`@`localhost` PROCEDURE `up_cargarPedidoVenta`()
+delimiter $$
+drop procedure if exists up_cargarPedidoVenta$$
+CREATE procedure up_cargarPedidoVenta()
 BEGIN
 
 declare idPedido int;
@@ -93,4 +95,6 @@ END LOOP loop1;
 close leer_detalle;
 close leer_pedidos;
 
-END
+END$$
+
+delimiter ;
