@@ -5,12 +5,12 @@ namespace frontend\modules\ventas\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use frontend\modules\ventas\models\CatalogoProducto;
+use frontend\modules\ventas\models\Venta;
 
 /**
- * CatalogoProductoSearch represents the model behind the search form about `frontend\modules\ventas\models\CatalogoProducto`.
+ * VentaSearch represents the model behind the search form about `frontend\modules\ventas\models\Venta`.
  */
-class CatalogoProductoSearch extends CatalogoProducto
+class VentaSearch extends Venta
 {
     /**
      * @inheritdoc
@@ -18,9 +18,7 @@ class CatalogoProductoSearch extends CatalogoProducto
     public function rules()
     {
         return [
-            [['id', 'catalogo_id', 'campana_id', 'producto_id', 'estado'], 'integer'],
-            [['descripcion'], 'safe'],
-            //[['precatprod'], 'number'],
+            [['id', 'despacho_id', 'pedido_id'], 'integer'],
         ];
     }
 
@@ -42,7 +40,7 @@ class CatalogoProductoSearch extends CatalogoProducto
      */
     public function search($params)
     {
-        $query = CatalogoProducto::find();
+        $query = Venta::find();
 
         // add conditions that should always apply here
 
@@ -61,22 +59,9 @@ class CatalogoProductoSearch extends CatalogoProducto
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'catalogo_id' => $this->catalogo_id,
-            'campana_id' => $this->campana_id,
-            'producto_id' => $this->producto_id,
-            //'incentivo_id' => $this->incentivo_id,
-            'estado' => $this->estado,
-             'unidad' =>$this->unidad,
-            'precio' => $this->precio,
-            'precio_vta' => $this->precio_vta,
-            'descuento' => $this->descuento,
-           // 'precatprod' => $this->precatprod,
-          //  'tamcatprod' => $this->tamcatprod,
-          //  'stocatprod' => $this->stocatprod,
+            'despacho_id' => $this->despacho_id,
+            'pedido_id' => $this->pedido_id,
         ]);
-
-        $query->andFilterWhere(['like', 'descripcion', $this->descripcion]);
-
 
         return $dataProvider;
     }

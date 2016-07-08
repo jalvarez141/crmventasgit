@@ -49,8 +49,8 @@ class CatalogoProducto extends \yii\db\ActiveRecord
            // [['catalogo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Catalogo::className(), 'targetAttribute' => ['catalogo_id' => 'id']],
            // [['incentivo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Incentivo::className(), 'targetAttribute' => ['incentivo_id' => 'id']],
            // [['producto_id'], 'exist', 'skipOnError' => true, 'targetClass' => Producto::className(), 'targetAttribute' => ['producto_id' => 'id']],
-             [['catalogo_id', 'campana_id', 'producto_id', 'incentivo_id'], 'required'],
-            [['catalogo_id', 'campana_id', 'producto_id', 'incentivo_id', 'estado'], 'integer'],
+             [['catalogo_id', 'campana_id', 'producto_id'], 'required'],
+            [['catalogo_id', 'campana_id', 'producto_id', 'estado'], 'integer'],
              [['unidad', 'descuento'], 'integer'],
             [['precio', 'precio_vta'], 'number'],
         ];
