@@ -1,4 +1,5 @@
 Cargar El procedimiento de la carpeta Procedure en la BD, y verificar si las tablas tienen los mismos campos. 
+La botones que te llevan a las diferentes interfaces estan en la ruta ventas/default/index.php.. a partir de aqui se puede iniciar
 -----------------------------------------------------------------------------------------------------------
 crear una caroeta 'modules' en frontend del proyecto, luego copiar toda la carpeta ventas en /frontend/modules/
 
